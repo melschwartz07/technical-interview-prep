@@ -24,7 +24,6 @@ function solution(a) {
     return -1;
 }
 
-
 //______________________________________________________________________________________________________________________________
 
 // Given an array of integers, find the pair of adjacent elements that has the largest product and return that product.
@@ -48,22 +47,6 @@ function solution(inputArray) {
 
 //______________________________________________________________________________________________________________________________
 
-// Given a string s consisting of small English letters, find and return the first instance of a non-repeating character in it. If there is no such character, return '_'.
-//
-//     Example
-// For s = "abacabad", the output should be
-// solution(s) = 'c'.
-//There are 2 non-repeating characters in the string: 'c' and 'd'. Return c since it appears in the string first.
-//For s = "abacabaabacaba", the output should be
-// solution(s) = '_'.
-//There are no characters in this string that do not repeat.
-
-function solution(s) {
-
-}
-
-//______________________________________________________________________________________________________________________________
-
 // Given a sequence of integers as an array, determine whether it is possible to obtain a strictly
 // increasing sequence by removing no more than one element from the array.
 
@@ -83,4 +66,57 @@ function solution(sequence) {
 
     }
     return true;
+}
+
+//______________________________________________________________________________________________________________________________
+// After becoming famous, the CodeBots decided to move into a new building together. Each of the rooms has a different cost,
+// and some of them are free, but there's a rumour that all the free rooms are haunted! Since the CodeBots are quite superstitious,
+// they refuse to stay in any of the free rooms, or any of the rooms below any of the free rooms.
+//
+// Given matrix, a rectangular matrix of integers, where each value represents the cost of the room, your task is to return
+// the total sum of all rooms that are suitable for the CodeBots (ie: add up all the values that don't appear below a 0).
+//
+// Example
+//
+// For
+//
+// matrix = [[0, 1, 1, 2],
+//     [0, 5, 0, 0],
+//     [2, 0, 3, 3]]
+// the output should be
+// solution(matrix) = 9.
+
+function solution(matrix) {
+    let sum = 0;
+    for (let row = 0; row < matrix.length; row++) {
+        const currRow = matrix[row];
+        for (let col = 0; col < currRow.length; col++) {
+            // they refuse to stay in any of the free rooms
+            if (currRow[col] === 0) {
+                // or any of the rooms below any of the free rooms.
+                if (row + 1 < matrix.length) {
+                    matrix[row + 1][col] = 0;
+                }
+            } else {
+                sum += currRow[col];
+            }
+        }
+    }
+    return sum;
+}
+
+//______________________________________________________________________________________________________________________________
+
+// Given a string s consisting of small English letters, find and return the first instance of a non-repeating character in it.
+// If there is no such character, return '_'.
+//     Example
+// For s = "abacabad", the output should be
+// solution(s) = 'c'.
+//There are 2 non-repeating characters in the string: 'c' and 'd'. Return c since it appears in the string first.
+//For s = "abacabaabacaba", the output should be
+// solution(s) = '_'.
+//There are no characters in this string that do not repeat.
+
+function solution(s) {
+
 }
