@@ -130,3 +130,20 @@ function solution(s) {
 }
 
 //______________________________________________________________________________________________________________________________
+
+// Given an array of strings, return another array containing all of its longest strings.
+
+function solution(inputArray) {
+    let longest = 0;
+
+    for (let i = 0; i < inputArray.length; i++) {
+        if (inputArray[i].length > longest) {
+            longest = inputArray[i].length
+        }
+    }
+
+    return inputArray.filter(el => el.length === longest);
+}
+
+//______________________________________________________________________________________________________________________________
+
