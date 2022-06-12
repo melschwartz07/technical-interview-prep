@@ -271,3 +271,30 @@ function solution(a) {
     return [team1, team2];
 }
 
+// Given a rectangular matrix of characters, add a border of asterisks(*) to it.
+
+function solution(picture) {
+    var linelength = picture[0].length + 2;
+    var topline = "*".repeat(linelength);
+    var bottomline = "*".repeat(linelength);
+    var result = [];
+    result.push(topline);
+    for (var i = 0; i < picture.length; i++) {
+        var newline = "*" + picture[i] + "*";
+        result.push(newline);
+    }
+    result.push(bottomline);
+    return result;
+}
+
+// Two arrays are called similar if one can be obtained from another by swapping at most one pair of elements in one of the arrays.
+// Given two arrays a and b, check whether they are similar.
+
+function solution(a, b) {
+    sum = 0;
+    for (i = 0; i < a.length; i++) {
+        if (a[i] != b[i]) {sum++}
+    }
+    a.sort(); b.sort();
+    return a.toString() == b.toString() && sum < 3}
+
