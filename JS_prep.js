@@ -249,6 +249,8 @@ function solution(s) {
     return s;
 }
 
+//______________________________________________________________________________________________________________________________
+
 
 // Several people are standing in a row and need to be divided into two teams. The first person goes into team 1,
 // the second goes into team 2, the third goes into team 1 again, the fourth into team 2, and so on.
@@ -271,6 +273,8 @@ function solution(a) {
     return [team1, team2];
 }
 
+//______________________________________________________________________________________________________________________________
+
 // Given a rectangular matrix of characters, add a border of asterisks(*) to it.
 
 function solution(picture) {
@@ -287,6 +291,8 @@ function solution(picture) {
     return result;
 }
 
+//______________________________________________________________________________________________________________________________
+
 // Two arrays are called similar if one can be obtained from another by swapping at most one pair of elements in one of the arrays.
 // Given two arrays a and b, check whether they are similar.
 
@@ -297,4 +303,54 @@ function solution(a, b) {
     }
     a.sort(); b.sort();
     return a.toString() == b.toString() && sum < 3}
+
+//______________________________________________________________________________________________________________________________
+
+// You are given an array of integers. On each move you are allowed to increase exactly one of its element by one.
+// Find the minimal number of moves required to obtain a strictly increasing sequence from the input.
+
+function solution(series) {
+    var moves = 0;
+
+    for (var i = 1; i < series.length; i++) {
+        if (series[i] <= series[i - 1]) {
+            diff = series[i - 1] - series[i] + 1;
+            series[i] += diff;
+            moves += diff;
+        }
+    }
+
+    return moves;
+}
+
+//______________________________________________________________________________________________________________________________
+
+// Given a string, find out if its characters can be rearranged to form a palindrome.
+//Example
+//
+// For inputString = "aabb", the output should be
+// solution(inputString) = true.
+//
+// We can rearrange "aabb" to make "abba", which is a palindrome.
+
+function solution(inputString) {
+    const isEven = inputString.length % 2 === 0;
+
+    let foundSingleChar = false;
+    while (inputString.length > 0) {
+        const newStr = inputString.replace(new RegExp(inputString.charAt(0), 'g'), '');
+        const charCount = inputString.length - newStr.length;
+        if (charCount % 2 !== 0) {
+            if (isEven || foundSingleChar) { return(false); }
+            foundSingleChar = true;
+        }
+        inputString = newStr;
+    }
+
+    return(true);
+}
+
+//______________________________________________________________________________________________________________________________
+
+
 
