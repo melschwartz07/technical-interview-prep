@@ -363,6 +363,28 @@ function solution(yourLeft, yourRight, friendsLeft, friendsRight) {
     return yourLeft == friendsLeft && yourRight == friendsRight || yourLeft == friendsRight && yourRight == friendsLeft;
 }
 
+//______________________________________________________________________________________________________________________________
+
+// Given an array of integers, find the maximal absolute difference between any two of its adjacent elements.
+//
+//     Example
+//
+// For inputArray = [2, 4, 1, 0], the output should be
+// solution(inputArray) = 3.
+
+function solution(nums) {
+    var max = 0;
+
+    for (var i = 1; i < nums.length; i++) {
+        var diff = Math.abs(nums[i] - nums[i - 1]);
+        max = (diff > max) ? diff : max;
+    }
+
+    return max;
+}
+//______________________________________________________________________________________________________________________________
+
+
 
 
 
