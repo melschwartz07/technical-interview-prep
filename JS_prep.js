@@ -456,6 +456,61 @@ exports.twoNumberSum = twoNumberSum;
 
 //______________________________________________________________________________________________________________________________
 
+function Book(title, author, ISBN, numCopies) {
+    this.title = title;
+    this.author = author;
+    this.ISBN = ISBN;
+    this.numCopies = numCopies;
+}
+
+Book.prototype.getAvailability = function(){
+    if (this.numCopies === 0) {
+        return "Out of stock";
+    } else if (this.numCopies < 10){
+        return "Low stock";
+    }
+    return "In stock";
+}
+
+Book.prototype = function(numCopiesSold = 1){
+    this.numCopies -= numCopiesSold;
+}
+
+Book.prototype.restock = function(numCopiesStocked = 5){
+    this.numCopies += numCopiesStocked;
+}
+
+const HungerGames = new Book("Hunger Games", "Suzanne Collins", 123445, 5);
+console.log(HungerGames.getAvailability());
+HungerGames.restock(12);
+console.log(HungerGames.getAvailability());
+HungerGames.sell(17);
+console.log(HungerGames.getAvailability());
+
+//______________________________________________________________________________________________________________________________
+
+function Movie(title, director, genre, releaseYear, rating){
+    this.title = title;
+    this.director = director;
+    this.genre = genre;
+    this.releaseYear = releaseYear;
+    this.rating = rating;
+}
+
+Movie.prototype.getOverview = function(){
+    return `${this.title}, a ${this.genre} film directed by ${this.director} was released in ${this.releaseYear}. It received a rating of ${this.rating}`;
+}
+
+const Spiderman = new Movie("Spiderman", "Sam Rami", "Action", 2002, 87);
+const Batman = new Movie("The Dark Knight", "Christopher Nolan", "Action", 2008, 83);
+
+console.log(Spiderman);
+console.log(Batman);
+
+//______________________________________________________________________________________________________________________________
+
+
+
 
 
 
