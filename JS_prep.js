@@ -428,7 +428,33 @@ outer();
 
 //______________________________________________________________________________________________________________________________
 
+//Write a function that takes in a non-empty array of distinct integers and an integer representing a target sum.
+//If any two numbers in the input array sum up to the target sum, the function should return them in an array, in any order.
+//If no two numbers sum up to the target sum, the function should return an empty array.
 
+function twoNumberSum(array, targetSum) {
+    // iterate over the array
+    // Set is used so you can check if a given has been seen
+    const seen = new Set();
+
+    for (let num of array){
+        //complement is the number that will sum up to target when added to the current number we are considering
+
+        const complement = targetSum - num;
+
+        //If complement is seen before then we have a paid of numbers summing up to the target
+        if(seen.has(complement)){
+            return [num, complement];
+        }
+        seen.add(num);
+    }
+    return [];
+}
+
+// Do not edit the line below.
+exports.twoNumberSum = twoNumberSum;
+
+//______________________________________________________________________________________________________________________________
 
 
 
