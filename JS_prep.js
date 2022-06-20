@@ -350,6 +350,18 @@ function solution(inputString) {
     return(true);
 }
 
+//another way
+
+function solution(inputString){
+    var reversed = inputString.split("").reverse().join("");
+
+    if (reversed === inputString){
+        return true;
+    } else {
+        return false;
+    }
+}
+
 //______________________________________________________________________________________________________________________________
 
 // Call two arms equally strong if the heaviest weights they each are able to lift are equal.
