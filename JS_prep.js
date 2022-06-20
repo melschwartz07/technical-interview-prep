@@ -47,6 +47,18 @@ function solution(inputArray) {
     return prod;
 }
 
+//another way
+
+function solution(inputArray){
+    var highest = inputArray[0] * inputArray[1];
+
+    for (var i = 1; i < inputArray.length, i++){
+        highest = Math.max(highest, inputArray[i] * inputArray[i-1]);
+    }
+
+    return highest;
+}
+
 //______________________________________________________________________________________________________________________________
 
 // Given a sequence of integers as an array, determine whether it is possible to obtain a strictly
