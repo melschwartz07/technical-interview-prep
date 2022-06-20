@@ -397,6 +397,23 @@ function solution(nums) {
     return max;
 }
 
+//______________________________________________________________________________________________________________________________
+
+//How do you create a private variable in JavaScript?
+
+function secretVariable(){
+    var private = "hidden message";
+    retrun function(){
+        return private;
+    }
+}
+var getPrivateVariable = secretVariable();
+console.log(getPrivateVariable());
+
+//______________________________________________________________________________________________________________________________
+
+
+
 
 
 
