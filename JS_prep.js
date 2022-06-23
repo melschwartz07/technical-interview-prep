@@ -310,7 +310,7 @@ function solution(picture) {
 
 function solution(a, b) {
     sum = 0;
-    for (i = 0; i < a.length; i++) {
+    for (var i = 0; i < a.length; i++) {
         if (a[i] != b[i]) {sum++}
     }
     a.sort(); b.sort();
@@ -532,6 +532,53 @@ console.log(Spiderman);
 console.log(Batman);
 
 //______________________________________________________________________________________________________________________________
+
+// You are given a two-digit integer n. Return the sum of its digits.
+
+function addTwoDigits(n){
+    //Take the number and convert it to  a string
+
+    let str = n.toString();
+    //Create and array where each string in str is an array element
+    let arr= str.split('');
+
+    let arr0 = arr[0];
+    let arr1 = arr[1];
+
+    return +arr[0] + +arr[1];
+}
+
+//______________________________________________________________________________________________________________________________
+
+//Given an integer n, return the largest number that contains exactly n digits.
+
+function solution(n){
+    let number = "9";
+    for (let i = 1; i < n; i++){
+        number += "9";
+    }
+    return parseInt(number);
+}
+
+//______________________________________________________________________________________________________________________________
+
+// Fizzbuzz solution for moktek interview
+
+function fizzBuzz(){
+    for (var i = 1; i <= 100; i++){
+        if (i % 3 === 0 || i % 5 === 0){
+            console.log("FizzBuzz");
+        } else if (i % 3 ===0) {
+            console.log("Fizz")
+        } else if (i % 5 === 0){
+            console.log("Buzz");
+        } else {
+            console.log(i);
+        }
+    }
+}
+//______________________________________________________________________________________________________________________________
+
 
 
 
