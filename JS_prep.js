@@ -579,6 +579,17 @@ function fizzBuzz(){
 }
 //______________________________________________________________________________________________________________________________
 
+// Given an array of ints, return true if the array contains two 7's next to each other, or there are two 7's separated by one element, such as with {7, 1, 7}.
+//
+//     example input: [1, 7, 7]
+// expected output: true
+//
+// example input: [1, 7, 1, 7]
+// expected output: true
+//
+// example input: [2,7,8]
+// expected output: false
+
 
 
 
