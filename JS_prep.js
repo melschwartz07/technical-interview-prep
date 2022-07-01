@@ -590,6 +590,23 @@ function fizzBuzz(){
 // example input: [2,7,8]
 // expected output: false
 
+//______________________________________________________________________________________________________________________________
+
+// Staircase detail.
+// this is a staircase of size n =4
+//              #
+//             ##
+//            ###
+//           ####
+
+// Write a program that prints a staircase of the size of n
+
+function staircase(n){
+    for (var i = 1; i <= n; i++){
+        console.log("".repeat(n-1) + "#".repeat(i));
+    }
+}
+
 
 
 
