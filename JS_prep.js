@@ -606,6 +606,23 @@ function staircase(n){
         console.log("".repeat(n-1) + "#".repeat(i));
     }
 }
+//______________________________________________________________________________________________________________________________
+// Fizzbuzz solution for moktek interview
+
+function fizzBuzz(){
+    for (var i = 1; i <= 100; i++){
+        if (i % 3 === 0 || i % 5 === 0){
+            console.log("FizzBuzz");
+        } else if (i % 3 ===0) {
+            console.log("Fizz")
+        } else if (i % 5 === 0){
+            console.log("Buzz");
+        } else {
+            console.log(i);
+        }
+    }
+}
+//______________________________________________________________________________________________________________________________
 
 
 
