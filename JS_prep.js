@@ -642,6 +642,38 @@ outer();
 
 //______________________________________________________________________________________________________________________________
 
+// There will be two arrays of integers. Determine all integers that satisfy the following two conditions:
+//
+//     The elements of the first array are all factors of the integer being considered
+// The integer being considered is a factor of all elements of the second array
+// These numbers are referred to as being between the two arrays. Determine how many such numbers exist.
+
+function getTotalX(a, b) {
+    a.sort((a,b) => a-b)
+    b.sort((a,b) => a-b)
+    let sol = []
+    let factor = a[a.length-1]
+    while(true){
+        let flag = true;
+        for(let i = 0; i<a.length; i++){
+            console.log(factor);
+            if(factor % a[i] !== 0){
+                flag = false;
+                break;
+            }
+            if(b.filter(num => num%factor === 0).length !== b.length){
+                flag = false;
+                break;
+            }
+        }
+        if(flag) sol.push(factor);
+        factor += a[a.length-1];
+        if(factor>b[0]) break;
+    }
+    return sol.length;
+
+}
+
 
 
 
