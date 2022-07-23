@@ -1278,20 +1278,329 @@ function isCharOfMac(c){
     }
     return false;
 }
+//______________________________________________________________________________________________________________________________
+
+// Determine if the given character is a digit or not.
+function solution(symbol) {
+    return !isNaN(symbol)}
+
+//______________________________________________________________________________________________________________________________
+//
+// Given a string, return its encoding defined as follows:
+//
+//     First, the string is divided into the least possible number of disjoint substrings consisting of identical characters
+// for example, "aabbbc" is divided into ["aa", "bbb", "c"]
+// Next, each substring with length greater than one is replaced with a concatenation of its length and the repeating character
+// for example, substring "bbb" is replaced by "3b"
+// Finally, all the new strings are concatenated together in the same order and a new string is returned.
+function solution(s) {
+
+    let pre ="";
+    let count = 0;
+    let res = "";
+    for (var i=0; i<s.length+1;i++) {
+        if (s[i] != pre) {
+            if (count == 1) {
+                res += pre;
+            } else if (count > 1) {
+                res += count.toString() + pre;
+            }
+            pre = s[i];
+            count=1;
+        } else {
+            count++;
+        }
+    }
+    return res;
+}
+//______________________________________________________________________________________________________________________________
+// Given a position of a knight on the standard chessboard, find the number of different moves the knight can perform.
+//
+//     The knight can move to a square that is two squares horizontally and one square vertically, or two squares vertically and one square horizontally away from it. The complete move therefore looks like the letter L.
+//     Check out the image below to see all valid moves for a knight piece that is placed on one of the central squares.
+function solution(cell) {
+    let possibilies = 0;
+    let lines = ["a", "b", "c", "d", "e", "f", "g", "h"];
+    let positions = [[2,1], [1,2], [-2,1], [-1,2], [2,-1], [1,-2], [-2,-1], [-1,-2]];
+    let location = [lines.indexOf(cell[0])+1, parseInt(cell[1])];
+
+    positions.map(i=>{
+        let result = [i[0]+location[0], i[1]+location[1]];
+        if(result[0] > 0 && result[0] < 9 && result[1] > 0 && result[1] < 9) possibilies++;
+    });
+
+    return possibilies;
+}
+
+//______________________________________________________________________________________________________________________________
+// Given some integer, find the maximal number you can obtain by deleting exactly one digit of the given number.
+
+function solution(n) {
+    let m = 0;
+    for(let d = 1;d <= n; d *= 10){
+        let t = n%d + (Math.floor(Math.floor(n/d)/10)*d)
+        m = Math.max(m,t);
+    }
+    return m;
+}
+
+//______________________________________________________________________________________________________________________________
+// Define a word as a sequence of consecutive English letters. Find the longest word from the given string.
+
+function solution(text) {
+    let res = text.match(/([a-z]+)/ig);
+    let max = "";
+    for(let i=0;i<res.length;i++)
+        if(res[i].length>max.length)
+            max = res[i];
+    return max;
+}
+//______________________________________________________________________________________________________________________________
+// Check if the given string is a correct time representation of the 24-hour clock.
+function solution(time) {
+    let realTime = time.split(':');
+
+    if(parseInt(realTime[0])>24 || parseInt(realTime[0])<0 || parseInt(realTime[1])>=60 || parseInt(realTime[1])<0){ return false;
+    }
+    if(parseInt(realTime[0])>=24 && parseInt(realTime[1])>=0){ return false;}
+    return true;
+}
+//______________________________________________________________________________________________________________________________
+// CodeMaster has just returned from shopping. He scanned the check of the items he bought and gave the resulting string to
+// Ratiorg to figure out the total number of purchased items. Since Ratiorg is a bot he is definitely going to automate it, so he needs a program that sums up all the numbers which appear in the given input.
+//
+//     Help Ratiorg by writing a function that returns the sum of numbers that appear in the given inputString.
+
+function solution(inputString) {
+    var r = 0;
+    for(var i=0;i<inputString.length;i++){
+        var tmp = "0"
+        while("0" <= inputString[i] && inputString[i] <= "9" && i < inputString.length){
+            tmp += inputString[i].toString()
+            i++
+        }
+        r += parseInt(tmp)
+    }
+    return r
+}
+//______________________________________________________________________________________________________________________________
+// Given a rectangular matrix containing only digits, calculate the number of different 2 × 2 squares in it.
+function solution(matrix) {
+    let s = new Set();
+    for(let i = 0;i < matrix.length - 1;i++){
+        for(let j = 0;j < matrix[0].length - 1;j++){
+            s.add('' + matrix[i][j] + matrix[i+1][j] + matrix[i][j+1] + matrix[i+1][j+1]);
+        }
+    }
+    return s.size;
+}
+//______________________________________________________________________________________________________________________________
+// Given an integer product, find the smallest positive (i.e. greater than 0) integer the product of whose digits is equal to product.
+//     If there is no such integer, return -1 instead.
+function solution(product) {
+    if (product == 0) {return 10}
+    for (i = 0; i < 3600; i++) {
+        a = 1
+        for (j of i.toString()) {a *= Number(j)}
+        if (a == product) {return i}}
+    return -1}
+
+//______________________________________________________________________________________________________________________________
+
+// You are given an array of desired filenames in the order of their creation. Since two files cannot have equal names,
+// the one which comes later will have an addition to its name in a form of (k), where k is the smallest positive integer
+// such that the obtained name is not used yet.
+//
+//     Return an array of names that will be given to the files.
+
+function solution(names) {
+    var tab = [];
+    for (var value of names) {
+        var counter = 0;
+        var name = value;
+        while (tab.indexOf(value) != -1)
+            value = `${name}(${++counter})`;
+        tab.push(value);
+    }
+    return tab;
+}
+//______________________________________________________________________________________________________________________________
+// You are taking part in an Escape Room challenge designed specifically for programmers. In your efforts to find a clue,
+// you've found a binary code written on the wall behind a vase, and realized that it must be an encrypted message.
+// After some thought, your first guess is that each consecutive 8 bits of the code stand for the character with the corresponding extended ASCII code.
+//
+// Assuming that your hunch is correct, decode the message.
+
+function solution(code) {
+    let result = "";
+
+    while (code !== "") {
+        let eightBits = code.substring(0, 8);
+        let number = parseInt(eightBits, 2);
+
+        result += String.fromCharCode(number);
+        code = code.substring(8);
+    }
+
+    return result;
+}
+
+//______________________________________________________________________________________________________________________________
+
+// Construct a square matrix with a size N × N containing integers from 1 to N * N in a spiral order, starting from top-left and in clockwise direction.
 
 
+//jraghon solution
+function solution(n) {
+    var mat = [...Array(n)].map(e=>[]);
+    var v,r,c,dir;
+    for(v=r=c=dir=0; v++<n*n; ) {
+
+        //enter the new value
+        mat[r][c] = v;
+
+        if(dir==0) { //move right?
+            if(c+1<n && !mat[r][c+1])
+                ++c
+            else {
+                dir=1
+                ++r
+            }
+        } else if(dir==1) { //move down?
+            if(r+1<n && !mat[r+1][c])
+                ++r
+            else {
+                dir=2
+                --c
+            }
+        } else if(dir==2) { //move left?
+            if(c>0 && !mat[r][c-1])
+                --c
+            else {
+                dir=3
+                --r
+            }
+        } else { //move up?
+            if(!mat[r-1][c])
+                --r
+            else {
+                dir=0
+                ++c
+            }
+        }
+    }
+    return mat;
+}
+
+//______________________________________________________________________________________________________________________________
+
+// Sudoku is a number-placement puzzle. The objective is to fill a 9 × 9 grid with digits so that each column, each row, and each of the nine 3 × 3 sub-grids that compose the grid contains all of the digits from 1 to 9.
+//
+// This algorithm should check if the given grid of numbers represents a correct solution to Sudoku.
+
+const solution = grid => {
+
+    const checkBlock = block => {
+        let sample = '123456789';
+        block.sort();
+
+        if (block.join('') === sample) {
+            return true;
+        }
+
+        return false;
+    }
+
+    let subgrids = [];
+
+    for (let i = 0; i < 3; i++) {
+        subgrids.push([]);
+
+        for (let j = 0; j < 3; j++) {
+            subgrids[i].push([]);
+        }
+
+    }
+
+    for (let i = 0; i < 9; i++) {
+        let horizontal = [];
+        let vertical = [];
+        for (let j = 0; j < 9; j++) {
+            horizontal.push(grid[i][j]);
+            vertical.push(grid[j][i]);
+            subgrids[Math.floor(i / 3)][Math.floor(j / 3)].push(grid[i][j]);
+        }
+
+        if (!checkBlock(horizontal)) {
+            return false;
+        }
+
+        if (!checkBlock(vertical)) {
+            return false;
+        }
+    }
+
+    for (let i = 0; i < 3; i++) {
+        for (let j = 0; j < 3; j++) {
+            if (!checkBlock(subgrids[i][j]))
+                return false;
+        }
+    }
+
+    return true;
+}
+
+// ______________________________________________________________________________________________________________________________
 
 
+// n children have got m pieces of candy. They want to eat as much candy as they can, but each child must eat exactly the same amount
+// of candy as any other child. Determine how many pieces of candy will be eaten by all the children together. Individual pieces of candy cannot be split.
+
+function solution(n, m) {
+    return m - m % n;
+}
 
 
+//______________________________________________________________________________________________________________________________
+//
+// Your friend advised you to see a new performance in the most popular theater in the city. He knows a lot about art and his advice is usually good,
+// but not this time: the performance turned out to be awfully dull. It's so bad you want to sneak out, which is quite simple, especially since the
+// exit is located right behind your row to the left. All you need to do is climb over your seat and make your way to the exit.
+//
+// The main problem is your shyness: you're afraid that you'll end up blocking the view (even if only for a couple of seconds) of all the people
+// who sit behind you and in your column or the columns to your left. To gain some courage, you decide to calculate the number of such people and see
+// if you can possibly make it to the exit without disturbing too many people.
+//
+//     Given the total number of rows and columns in the theater (nRows and nCols, respectively), and the row and column you're sitting in,
+//     return the number of people who sit strictly behind you and in your column or to the left, assuming all seats are occupied.
 
+function solution(nCols, nRows, col, row) {
+    return (nCols - col + 1)*(nRows - row);
+}
+//______________________________________________________________________________________________________________________________
+//
+// Given a divisor and a bound, find the largest integer N such that:
+//
+//     N is divisible by divisor.
+//     N is less than or equal to bound.
+//     N is greater than 0.
+// It is guaranteed that such a number exists.
+function solution(divisor, bound) {
+    return bound-bound%divisor;
+}
 
+//______________________________________________________________________________________________________________________________
 
+// Consider integer numbers from 0 to n - 1 written down along the circle in such a way that the distance between any
+// two neighboring numbers is equal (note that 0 and n - 1 are neighboring, too).
+//
+// Given n and firstNumber, find the number which is written in the radially opposite position to firstNumber.
 
+function solution(n, firstNumber) {
+    return ((n / 2) + firstNumber) % n;
+}
 
-
-
-
+//______________________________________________________________________________________________________________________________
 
 
 
