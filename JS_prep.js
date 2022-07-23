@@ -709,6 +709,583 @@ function solution(inputArray){
 
 //______________________________________________________________________________________________________________________________
 
+// Given an array of integers, find the maximal absolute difference between any two of its adjacent elements.
+function solution(inputArray) {
+    let maxDiff = 0;
+
+    for (let i = 1; i < inputArray.length; i++) {
+        const currentDiff = Math.abs(inputArray[i - 1] - inputArray[i]);
+
+        if (maxDiff < currentDiff) {
+            maxDiff = currentDiff;
+        }
+    }
+
+    return maxDiff;
+}
+
+//______________________________________________________________________________________________________________________________
+// You are given an array of integers representing coordinates of obstacles situated on a straight line.
+//
+//     Assume that you are jumping from the point with coordinate 0 to the right. You are allowed only to make jumps of the same length represented by some integer.
+//
+//     Find the minimal length of the jump enough to avoid all the obstacles.
+
+function solution(arr) {
+    arr.sort((a, b) => a - b);
+    let result = arr[arr.length-1]+1;
+    for (let i = 2; i < arr[arr.length - 1]; i++) {
+        if (arr.includes(i)) continue;
+        let check = "N";
+        for (let j = 0; j < arr.length; j++) {
+            if (arr[j] % i == 0) {
+                check = "Y";
+                break;
+            }
+        }
+        if (check == "Y") continue;
+        result = i;
+        break;
+    }
+    return result;
+}
+
+
+//______________________________________________________________________________________________________________________________
+
+// Last night you partied a little too hard. Now there's a black and white photo of you that's about to go viral! You can't let this ruin your reputation, so you want to apply the box blur algorithm to the photo to hide its content.
+//
+// The pixels in the input image are represented as integers. The algorithm distorts the input image in the following way: Every pixel x in the output image has a value equal to the average value of the pixel values from the 3 × 3 square that has its center at x, including x itself. All the pixels on the border of x are then removed.
+function solution(image) {
+    var blured = [];
+    for (var i = 1; i < image.length - 1; i++){
+        var row = [];
+        for (var j = 1; j < image[i].length - 1; j++) {
+            var average = image[i - 1][j - 1] + image[i - 1][j] + image[i - 1][j + 1];
+            average+= image[i][j - 1] + image[i][j] + image[i][j + 1];
+            average+= image[i + 1][j - 1] + image[i + 1][j] + image[i + 1][j + 1];
+            row.push(Math.floor(average / 9));
+        }
+        blured.push(row);
+    }
+    return blured;
+}
+
+//______________________________________________________________________________________________________________________________
+
+// In the popular Minesweeper game you have a board with some mines and those cells that don't contain a mine have a number in it
+// that indicates the total number of mines in the neighboring cells. Starting off with some arrangement of mines we want to create a Minesweeper game setup.
+function solution(matrix) {
+    let board = [];
+
+    for (let y = 0; y < matrix.length; y++) {
+
+        board.push([]);
+
+        for(let x = 0; x < matrix[y].length; x++) {
+            board[y][x] = 0;
+
+            // Above
+            if (  matrix[y][x - 1] !== undefined) {
+                if (matrix[y][x - 1] === true) {
+                    board[y][x]++;
+                }
+            }
+            // Below
+            if ( matrix[y][x + 1] !== undefined) {
+                if (matrix[y][x + 1] === true) {
+                    board[y][x]++;
+                }
+            }
+            // Left
+            if ( matrix[y - 1] !== undefined) {
+                if (matrix[y - 1][x] === true) {
+                    board[y][x]++;
+                }
+            }
+            // Right
+            if ( matrix[y + 1] !== undefined) {
+                if (matrix[y + 1][x] === true) {
+                    board[y][x]++
+                }
+            }
+            // Down Right
+            if ( matrix[y + 1] !== undefined) {
+                if (matrix[y + 1][x + 1] === true) {
+                    board[y][x]++;
+                }
+            }
+            // Down Left
+            if (matrix[y + 1] !== undefined) {
+                if (matrix[y + 1][x - 1] === true) {
+                    board[y][x]++;
+                }
+            }
+            // Top Right
+            if ( matrix[y - 1] !== undefined) {
+                if (matrix[y - 1][x + 1] === true) {
+                    board[y][x]++;
+                }
+            }
+            // Top Left
+            if ( matrix[y -  1] !== undefined) {
+                if (matrix[y - 1][x - 1] === true) {
+                    board[y][x]++;
+                }
+            }
+
+        }
+    }
+
+    return board;
+
+}
+//______________________________________________________________________________________________________________________________
+// Given an array of integers, replace all the occurrences of elemToReplace with substitutionElem.
+
+function solution(inputArray, elemToReplace, substitutionElem) {
+    for(var i = 0; i < inputArray.length; i++){
+        if (inputArray[i] == elemToReplace)
+            inputArray[i] = substitutionElem
+    }
+    return inputArray
+}
+//______________________________________________________________________________________________________________________________
+// Check if all digits of the given integer are even.
+function solution(n) {
+    while(n > 0){
+        if((n%10)%2==1){
+            return false
+        }
+        n = Math.floor(n/10)
+    }
+    return true
+}
+//______________________________________________________________________________________________________________________________
+
+// Correct variable names consist only of English letters, digits and underscores and they can't start with a digit.
+//
+// Check if the given string is a correct variable name.
+function solution(name) {
+
+    for (let i = 0; i < name.length; i++){
+
+        var x = name.charCodeAt(i);
+
+        console.log(x);
+
+        switch (true) {
+            case (x < 48): {return false; break;}
+            case ((x > 57) && (x < 65)): {return false; break;}
+            case ((x > 90) && (x < 95)): {return false; break;}
+            case (x == 96): {return false; break;}
+            case (x > 122): {return false; break;}
+        }
+    }
+
+    var firstLetterCode = name.charCodeAt(0);
+
+    if ((firstLetterCode > 47) && (firstLetterCode < 57)){
+        return false;
+    }
+
+    return true;
+
+}
+//______________________________________________________________________________________________________________________________
+
+// Given a string, your task is to replace each of its characters by the next one in the English alphabet; i.e. replace a with b,
+//     replace b with c, etc (z would be replaced by a).
+
+function solution(input) {
+    let result = '';
+    for(let i=0; i<input.length; i++){
+        let num = input[i].charCodeAt(0);
+        if( num == 122){
+            num = 97
+        }else{
+            num++;
+        }
+
+        result += String.fromCharCode(num);
+    }
+    return result;
+}
+
+//______________________________________________________________________________________________________________________________
+
+// Given two cells on the standard chess board, determine whether they have the same color or not.
+function solution(cell1, cell2) {
+    var a = cell1.charCodeAt(0) + cell1.charCodeAt(1);
+    var b = cell2.charCodeAt(0) + cell2.charCodeAt(1);
+    return a % 2 == b % 2;
+}
+
+//______________________________________________________________________________________________________________________________
+
+// Consider integer numbers from 0 to n - 1 written down along the circle in such a way that the distance between any two neighboring
+// numbers is equal (note that 0 and n - 1 are neighboring, too).
+//
+// Given n and firstNumber, find the number which is written in the radially opposite position to firstNumber.
+
+function solution(n, firstNumber) {
+    return (firstNumber + n/2)%n;
+}
+//______________________________________________________________________________________________________________________________
+// You have deposited a specific amount of money into your bank account. Each year your balance increases at the same growth rate.
+//     With the assumption that you don't make any additional deposits, find out how long it would take for your balance to pass a specific threshold.
+
+function solution(d, r, t) {
+    return Math.ceil(Math.log(t/d)/Math.log(r/100+1));
+}
+
+//______________________________________________________________________________________________________________________________
+
+// Given a sorted array of integers a, your task is to determine which element of a is closest to all other values of a.
+// In other words, find the element x in a, which minimizes the following sum:
+//
+//     abs(a[0] - x) + abs(a[1] - x) + ... + abs(a[a.length - 1] - x)
+// (where abs denotes the absolute value)
+//
+// If there are several possible answers, output the smallest one.
+
+function solution(a) {
+    return a[Math.ceil(a.length/2)-1];
+}
+
+//______________________________________________________________________________________________________________________________
+// Given an array of equal-length strings, you'd like to know if it's possible to rearrange the order of the elements in such a way that each
+// consecutive pair of strings differ by exactly one character. Return true if it's possible, and false if not.
+
+function solution(inputArray) {
+    var bruteForce = function(depth, inputArray) {
+        var swap = function(i, j) {
+            tmp = inputArray[i];
+            inputArray[i] = inputArray[j];
+            inputArray[j] = tmp;
+        };
+        if (depth === inputArray.length) {
+            var correct = true;
+            for (var i = 0; i < inputArray.length - 1; i++) {
+                var differences = 0;
+                for (var j = 0; j < inputArray[i].length; j++) {
+                    if (inputArray[i][j] !== inputArray[i + 1][j]) {
+                        differences++;
+                    }
+                }
+                if (differences !== 1) {
+                    correct = false;
+                }
+            }
+            if (correct) {
+                return true;
+            }
+            return false;
+        }
+        for (var i = depth; i < inputArray.length; i++) {
+            swap(depth, i);
+            if (bruteForce(depth + 1, inputArray)) {
+                return true;
+            }
+            swap(depth, i);
+        }
+        return false;
+    };
+    if (bruteForce(0, inputArray)) {
+        return true;
+    }
+    return false;
+}
+
+//______________________________________________________________________________________________________________________________
+
+// Given array of integers, remove each kth element from it.
+function solution(inputArray, k) {
+    var cont = 1;
+    for (var i = 0; i < inputArray.length; ) {
+        if  ((i+cont) % k == 0) {
+            inputArray.splice(i,1);
+            cont++
+        } else {
+            i++
+        }
+    }
+    return inputArray;
+}
+
+//______________________________________________________________________________________________________________________________
+// Find the leftmost digit that occurs in a given string.
+function solution(inputString) {
+    let digits = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+
+    inputString = inputString.split("");
+
+    for (let i = 0; i < inputString.length; i++) {
+        if (digits.includes(inputString[i])) {
+            return inputString[i];
+        }
+    }
+}
+
+//______________________________________________________________________________________________________________________________
+
+// Given a string, find the number of different characters in it.
+function solution(s) {
+    s = s.split('').sort();
+    var char = s[0];
+    var num = 1;
+    for(var i = 1; i < s.length; i++){
+        if(s[i] != char){
+            char = s[i];
+            num++;
+        }
+    }
+    return num;
+}
+
+//______________________________________________________________________________________________________________________________
+
+// Given array of integers, find the maximal possible sum of some of its k consecutive elements.
+function solution(inputArray, k) {
+    var s0 = 0;
+    for(var i = 0;i < k;i++)
+        s0 += inputArray[i];
+    var s1 = s0;
+    for(var i = 1; i <= inputArray.length - k;i++){
+        s1 = s1 - inputArray[i-1] + inputArray[i+k-1];
+        if(s1 > s0) s0 = s1;
+    }
+    return s0;
+}
+
+//______________________________________________________________________________________________________________________________
+// Caring for a plant can be hard work, but since you tend to it regularly, you have a plant that grows consistently.
+// Each day, its height increases by a fixed amount represented by the integer upSpeed. But due to lack of sunlight, the plant decreases in
+// height every night, by an amount represented by downSpeed.
+//
+//     Since you grew the plant from a seed, it started at height 0 initially. Given an integer desiredHeight, your task is to find how
+//     many days it'll take for the plant to reach this height.
+
+function solution(upSpeed, downSpeed, desiredHeight) {
+    var daySpeed = upSpeed - downSpeed;
+    var height = 0;
+    var days = 0
+    while( height < desiredHeight) {
+        days++;
+        height += upSpeed;
+        if (height < desiredHeight)
+            height -= downSpeed;
+        else
+            return days;
+    }
+    return days;
+}
+//______________________________________________________________________________________________________________________________
+// You found two items in a treasure chest! The first item weighs weight1 and is worth value1, and the second item weighs weight2 and is worth value2.
+// What is the total maximum value of the items you can take with you, assuming that your max weight capacity is maxW and you can't come back for the items later?
+
+function solution(value1, weight1, value2, weight2, maxW) {
+    let weights = [weight1, weight2];
+    let values = [value1, value2];
+    let weightOfMaxValue = weights[values.indexOf(Math.max(value1, value2))];
+    let weightOfMinValue = weights[values.indexOf(Math.min(value1, value2))];
+
+    if(maxW >= (weight1 + weight2)){return value1 + value2;}
+    else if(maxW >= weightOfMaxValue){return Math.max(value1, value2)}
+    else if(maxW >= weightOfMinValue){return Math.min(value1, value2)}
+    else {return 0;}
+}
+//______________________________________________________________________________________________________________________________
+
+// Given a string, output its longest prefix which contains only digits.
+function solution(inputString) {
+    let digits = [];
+    for (d = 0; d < 10; d++) digits.push(d+'');
+
+    inputString = inputString.split('');
+    let prefix = [];
+    for (c of inputString) {
+        if (digits.indexOf(c) !== -1) {
+            prefix.push(c);
+        } else {
+            break;
+        }
+    }
+
+    return prefix.join('');
+}
+//______________________________________________________________________________________________________________________________
+
+// Let's define digit degree of some positive integer as the number of times we need to replace this number with the sum of its
+// digits until we get to a one digit number.
+//
+// Given an integer, find its digit degree.
+function solution(n) {
+    var x = n.toString();
+    var t = 0;
+    while(x.length > 1) {
+        t++;
+        var y = 0;
+        for(var i = 0; i < x.length; i++) {
+            y+=Number(x[i]);
+        }
+        x = y.toString();
+    }
+    return t;
+}
+//______________________________________________________________________________________________________________________________
+// Given the positions of a white bishop and a black pawn on the standard chess board, determine whether the bishop can capture the pawn in one move.
+function solution(cell1, cell2) {
+    var getX = function(pos) {
+        return pos.charCodeAt() - 'A'.charCodeAt();
+    }
+    var getY = function(pos) {
+        return pos.charCodeAt() - '1'.charCodeAt();
+    }
+    var x1 = getX(cell1[0]),
+        y1 = getY(cell1[1]),
+        x2 = getX(cell2[0]),
+        y2 = getY(cell2[1]);
+    if (x1 + y1 === x2 + y2 || x1 - y1 === x2 - y2) {
+        return true;
+    }
+    return false;
+}
+//______________________________________________________________________________________________________________________________
+// A string is said to be beautiful if each letter in the string appears at most as many times as the previous letter in the
+// alphabet within the string; ie: b occurs no more times than a; c occurs no more times than b; etc. Note that letter a has no previous letter.
+//
+//     Given a string, check whether it is beautiful.
+
+function solution(inputString) {
+    letterCount = [];
+    for(i = 0 ; i < inputString.length ; i++){
+        inputNum = charToNum(inputString[i]);
+        if( typeof letterCount[inputNum] !== "undefined"){
+            letterCount[inputNum] += 1;
+        }
+        else{
+            letterCount[inputNum] = 1;
+        }
+    }
+
+    for(i = 0 ; i < letterCount.length - 1; i++){
+        if(typeof letterCount[i] === 'undefined' ||
+            typeof letterCount[i+1] === 'undefined' ||
+            letterCount[i] < letterCount[i+1]){
+            return false;
+        }
+
+    }
+    return true;
+}
+
+function charToNum(c){
+    return parseInt(c.charCodeAt(0) - 97);
+}
+
+//______________________________________________________________________________________________________________________________
+// An email address such as "John.Smith@example.com" is made up of a local part ("John.Smith"), an "@" symbol, then a domain part ("example.com").
+//
+//     The domain name part of an email address may only consist of letters, digits, hyphens and dots. The local part, however, also allows a
+//     lot of different special characters. Here you can look at several examples of correct and incorrect email addresses.
+//
+//     Given a valid email address, find its domain part.
+
+function solution(address) {
+    return address.substr(address.lastIndexOf("@") + 1)
+}
+
+//______________________________________________________________________________________________________________________________
+// Given a string, find the shortest possible string which can be achieved by adding characters to the end of initial string to make it a palindrome.
+function solution(st) {
+    checkPalindrome=(inputString)=>{
+        return inputString==inputString.split('').reverse().join('')
+    }
+    let popped=[];
+    let i=0;
+    while(i<st.length){
+        let s=st.slice(i);
+        if(checkPalindrome(s)===true) return st+popped.reverse().join('')
+        else popped.push(st.charAt(i))
+        i++
+
+    }
+}
+
+//______________________________________________________________________________________________________________________________
+// Elections are in progress!
+//
+//     Given an array of the numbers of votes given to each of the candidates so far, and an integer k equal to the number of voters
+//     who haven't cast their vote yet, find the number of candidates who still have a chance to win the election.
+//
+// The winner of the election must secure strictly more votes than any other candidate. If two or more candidates receive the same (maximum)
+// number of votes, assume there is no winner at all.
+function solution(votes, k) {
+
+    let count = 0
+    //votes = votes.sort(function(a,b){return b - a});
+    let max = Math.max.apply(null,votes);
+
+    console.log('max',max);
+
+
+    for (let i = 0; i < votes.length; i++){
+        if ((votes[i] + k) > max){
+            count++;
+            console.log('i',i);
+        }
+
+    }
+
+    if ((count === 0) && (votes.indexOf(max) === votes.lastIndexOf(max))){
+        count++
+    }
+
+    return count;
+}
+//______________________________________________________________________________________________________________________________
+// A media access control address (MAC address) is a unique identifier assigned to network interfaces for communications on the physical network segment.
+//
+//     The standard (IEEE 802) format for printing MAC-48 addresses in human-friendly form is six groups of two hexadecimal digits (0 to 9 or A to F),
+//     separated by hyphens (e.g. 01-23-45-67-89-AB).
+//
+// Your task is to check by given string inputString whether it corresponds to MAC-48 address or not.
+
+function solution(inputString) {
+    if(inputString.length !== 17){
+        return false;
+    }
+    for(a = 0 ; a < inputString.length ; a++){
+        if((a+1) % 3 == 0 ){
+            if(inputString[a] != "-"){
+                return false;
+            }
+        }
+        else if(!isCharOfMac(inputString[a])){
+            return false;
+        }
+    }
+    return true;
+}
+
+function isCharOfMac(c){
+    macAdress = "0123456789ABCDEF".split("");
+    for(i = 0 ; i < macAdress.length ; i++){
+        if(c == macAdress[i]){
+            return true;
+        }
+    }
+    return false;
+}
+
+
+
+
+
+
+
+
 
 
 
